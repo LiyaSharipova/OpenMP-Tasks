@@ -18,7 +18,7 @@ int main() {
         while (b) {
 
             if (tid == needed_thread) {
-                printf("Hello World from thread = %d; number of threads = %d\n", tid, n);
+                printf("Hello World from thread = %d; number of threads = %d\n", tid, omp_get_num_threads());
 #pragma omp atomic
                 needed_thread--;
                 b = false;
