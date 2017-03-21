@@ -12,7 +12,7 @@ using namespace std;
 
 int main(){
 
-#pragma omp parallel num_threads(8)
+#pragma omp parallel  num_threads(8)
     {
         int tid = omp_get_thread_num();
         int nthreads = omp_get_num_threads();
