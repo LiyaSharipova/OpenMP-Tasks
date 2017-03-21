@@ -16,7 +16,7 @@ int main(int argc, char *argv[]) {
     chunk = 1000;                    /* set loop iteration chunk size */
 
 /*** Spawn a parallel region explicitly scoping all variables ***/
-#pragma omp parallel shared(a,b,c,nthreads,chunk) private(tid,i,j,k)
+#pragma omp parallel shared(a,b,c,nthreads,chunk) private(tid,i,j,k) num_threads(20)
     {
         tid = omp_get_thread_num();
         if (tid == 0) {
@@ -28,11 +28,11 @@ int main(int argc, char *argv[]) {
 #pragma omp for schedule (static, chunk)
         for (i = 0; i < NRA; i++)
             for (j = 0; j < NCA; j++)
-                a[i][j] = rand()%10;
+                a[i][j] = i+j;
 #pragma omp for schedule (static, chunk)
         for (i = 0; i < NCA; i++)
             for (j = 0; j < NCB; j++)
-                b[i][j] = rand()%10;
+                b[i][j] = i-j;
 #pragma omp for schedule (static, chunk)
         for (i = 0; i < NRA; i++)
             for (j = 0; j < NCB; j++)
